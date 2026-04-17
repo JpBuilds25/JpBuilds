@@ -8,7 +8,7 @@
   <meta name="format-detection" content="telephone=no">
   <title>JP Builds · Clean frontend work</title>
   <style>
-    /* ----- RESET & BASE (deep obsidian) ----- */
+    /* ----- RESET & BASE (deep obsidian with subtle premium texture) ----- */
     * {
       margin: 0;
       padding: 0;
@@ -22,7 +22,7 @@
       --gold-start: #d4af37;
       --gold-mid: #f2d06b;
       --gold-end: #b58b2c;
-      --gold-soft: rgba(212, 175, 55, 0.2);
+      --gold-soft: rgba(212, 175, 55, 0.15);
       --text-light: #e6e6e6;
       --text-dim: #aaaaaa;
       --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
@@ -32,6 +32,11 @@
 
     body {
       background-color: var(--obsidian);
+      /* subtle premium grain / radial glow — minimal flavor */
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.02) 0%, transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(242, 208, 107, 0.015) 0%, transparent 40%),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.005) 0px, rgba(255,255,255,0.005) 2px, transparent 2px, transparent 8px);
       color: var(--text-light);
       font-family: var(--font-sans);
       line-height: 1.5;
@@ -68,7 +73,6 @@
       color: var(--text-dim);
     }
 
-    /* gold gradient utility */
     .gold-text {
       background: linear-gradient(135deg, var(--gold-start), var(--gold-mid), var(--gold-end));
       -webkit-background-clip: text;
@@ -77,7 +81,7 @@
       display: inline-block;
     }
 
-    /* ----- LAYOUT (fully responsive, mobile first) ----- */
+    /* ----- LAYOUT ----- */
     .container {
       max-width: 1400px;
       margin: 0 auto;
@@ -85,23 +89,10 @@
       width: 100%;
     }
 
-    /* header */
+    /* header with logo beside JP Builds */
     .site-header {
       padding: 1.5rem 0 0.8rem;
       border-bottom: 1px solid rgba(212, 175, 55, 0.12);
-    }
-
-    /* JP Builds logo / name */
-    .brand {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 5vw, 2.4rem);
-      letter-spacing: 2px;
-      color: var(--text-light);
-      text-decoration: none;
-      display: inline-block;
-    }
-    .brand span {
-      color: var(--gold-mid);
     }
 
     .header-flex {
@@ -110,6 +101,48 @@
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 1.5rem;
+    }
+
+    /* logo + brand group */
+    .brand-group {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem 1rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-mark {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: var(--text-light);
+      border-right: 1px solid var(--gold-soft);
+      padding-right: 1rem;
+      line-height: 1;
+    }
+    .logo-mark span {
+      color: var(--gold-mid);
+    }
+
+    .brand {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      letter-spacing: 2px;
+      color: var(--text-light);
+      text-decoration: none;
+    }
+    .brand span {
+      color: var(--gold-mid);
+    }
+
+    .brand-tagline {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-left: 0.25rem;
+      font-family: var(--font-sans);
     }
 
     .nav-bar {
@@ -134,7 +167,6 @@
       transition: color 0.25s var(--ease-out-expo);
     }
 
-    /* thin gold underline from center */
     .nav-link::after {
       content: '';
       position: absolute;
@@ -154,7 +186,6 @@
       left: 0;
     }
 
-    /* main */
     main {
       flex: 1;
     }
@@ -163,7 +194,7 @@
       margin-bottom: clamp(4rem, 12vw, 9rem);
     }
 
-    /* ----- HERO (responsive grid) ----- */
+    /* ----- HERO ----- */
     .hero-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.9fr;
@@ -183,7 +214,7 @@
       max-width: 28ch;
     }
 
-    /* ----- ABOUT (off-center, mobile friendly) ----- */
+    /* ----- ABOUT ----- */
     .about-grid {
       display: grid;
       grid-template-columns: 0.3fr 1.2fr 0.3fr;
@@ -197,6 +228,8 @@
       border-top: none;
       border-right: none;
       border-bottom: none;
+      /* subtle inner glow */
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.3), 0 8px 20px -5px rgba(0,0,0,0.5);
     }
     .about-content p {
       font-size: clamp(1.1rem, 3vw, 1.5rem);
@@ -211,7 +244,7 @@
       color: var(--gold-mid);
     }
 
-    /* ----- SERVICES (flex wrap, always readable) ----- */
+    /* ----- SERVICES ----- */
     .services-showcase {
       display: flex;
       flex-wrap: wrap;
@@ -237,15 +270,19 @@
       color: transparent;
     }
 
-    /* ----- CONTACT (updated with Philippines) ----- */
+    /* ----- CONTACT (no form, only info) ----- */
     .contact-wrapper {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 2.5rem;
+      grid-template-columns: 1fr;
       background: var(--charcoal);
       padding: clamp(2rem, 6vw, 3.5rem);
       border-radius: 2px;
-      box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.06);
+      box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.06), inset 0 0 40px rgba(0,0,0,0.3);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .contact-left {
+      text-align: left;
     }
     .contact-left h2 {
       margin-bottom: 0.25rem;
@@ -265,8 +302,8 @@
       display: flex;
       align-items: baseline;
       gap: 1rem;
-      font-size: 1.1rem;
-      padding: 0.4rem 0;
+      font-size: 1.2rem;
+      padding: 0.5rem 0;
       border-bottom: 1px dashed rgba(212, 175, 55, 0.15);
     }
     .contact-item span:first-child {
@@ -275,43 +312,15 @@
       min-width: 70px;
     }
 
-    .contact-form-mini {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-    }
-    .input-elegant {
-      background: transparent;
-      border: none;
-      border-bottom: 1px solid #4a4a4a;
-      padding: 0.8rem 0.2rem;
-      font-size: 1rem;
-      color: var(--text-light);
-      transition: border 0.2s;
-      width: 100%;
-    }
-    .input-elegant:focus {
-      outline: none;
-      border-bottom-color: var(--gold-mid);
-    }
-    .gold-button {
-      background: transparent;
-      border: 1.5px solid var(--gold-start);
-      color: var(--gold-mid);
-      padding: 0.8rem 2rem;
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      cursor: pointer;
-      transition: all 0.3s var(--ease-out-expo);
-      width: fit-content;
-    }
-    .gold-button:hover {
-      background: rgba(212, 175, 55, 0.06);
-      border-color: var(--gold-mid);
+    .contact-note {
+      margin-top: 2.2rem;
+      color: #aaa;
+      font-style: italic;
+      border-top: 1px solid rgba(212,175,55,0.1);
+      padding-top: 1.5rem;
     }
 
-    /* footer */
+    /* footer — removed obsidian/charcoal/gold line */
     .site-footer {
       border-top: 1px solid rgba(212, 175, 55, 0.1);
       padding: 1.8rem 0;
@@ -331,11 +340,14 @@
       transform: translateY(0);
     }
 
-    /* ---------- RESPONSIVENESS (mobile/tablet) ---------- */
+    /* ---------- RESPONSIVE ---------- */
     @media (max-width: 700px) {
       .header-flex {
         flex-direction: column;
         align-items: flex-start;
+      }
+      .brand-group {
+        width: 100%;
       }
       .nav-bar {
         justify-content: flex-start;
@@ -357,31 +369,26 @@
       .about-content {
         grid-column: 1;
       }
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
     }
 
     @media (max-width: 480px) {
       .nav-bar {
         gap: 1rem;
-        flex-wrap: wrap;
       }
-      .nav-link {
-        font-size: 0.9rem;
+      .brand-group {
+        gap: 0.5rem;
+      }
+      .logo-mark {
+        border-right: none;
+        padding-right: 0;
       }
       .contact-item {
         flex-wrap: wrap;
         gap: 0.3rem 1rem;
-      }
-      .gold-button {
-        width: 100%;
-        text-align: center;
+        font-size: 1rem;
       }
     }
 
-    /* large screens */
     @media (min-width: 1800px) {
       .container {
         max-width: 1600px;
@@ -393,7 +400,11 @@
 <header class="site-header">
   <div class="container">
     <div class="header-flex">
-      <div class="brand">JP <span>Builds</span></div>
+      <div class="brand-group">
+        <div class="logo-mark">JP<span>.</span></div>
+        <div class="brand">JP <span>Builds</span></div>
+        <div class="brand-tagline">SIMPLE WEBSITE DESIGN</div>
+      </div>
       <nav class="nav-bar" aria-label="Main navigation">
         <button class="nav-link" data-section="home">Home</button>
         <button class="nav-link" data-section="about">About</button>
@@ -422,7 +433,7 @@
     </div>
   </section>
 
-  <!-- ABOUT (Focus on Quality, plain English) -->
+  <!-- ABOUT -->
   <section id="about" class="fade-up">
     <div class="about-grid">
       <div class="about-content">
@@ -433,7 +444,7 @@
     </div>
   </section>
 
-  <!-- SERVICES (Frontend Excellence, simple terms) -->
+  <!-- SERVICES -->
   <section id="services" class="fade-up">
     <h2 style="margin-bottom: 0.25rem;">
       <span class="gold-text">Frontend</span> Excellence
@@ -457,7 +468,7 @@
     </div>
   </section>
 
-  <!-- CONTACT (updated with Philippines, plain info) -->
+  <!-- CONTACT (no form, only info) -->
   <section id="contact" class="fade-up">
     <div class="contact-wrapper">
       <div class="contact-left">
@@ -477,14 +488,9 @@
             <span>Philippines</span>
           </div>
         </div>
-        <p style="margin-top: 2rem; color: #aaa;">We reply within a day.</p>
-      </div>
-      <div class="contact-form-mini">
-        <input type="text" class="input-elegant" placeholder="Your name" aria-label="Name" disabled>
-        <input type="email" class="input-elegant" placeholder="Email address" aria-label="Email" disabled>
-        <textarea class="input-elegant" placeholder="Tell us about your project" rows="2" disabled style="resize: none;"></textarea>
-        <button class="gold-button" id="dummyContactBtn" type="button">Send message</button>
-        <p style="font-size: 0.75rem; opacity: 0.6;">(demo interface · all safe)</p>
+        <div class="contact-note">
+          We reply within a day. No forms — just send an email or call.
+        </div>
       </div>
     </div>
   </section>
@@ -493,7 +499,7 @@
 <footer class="site-footer">
   <div class="container">
     <span>JP Builds · Frontend work · 2026</span>
-    <div style="margin-top: 0.6rem; letter-spacing: 2px;">OBSIDIAN · CHARCOAL · GOLD</div>
+    <!-- removed obsidian/charcoal/gold line -->
   </div>
 </footer>
 
@@ -501,7 +507,7 @@
   (function() {
     "use strict";
 
-    // ---------- SECURITY: only textContent, zero innerHTML ----------
+    // ---------- SECURITY: textContent only, zero innerHTML ----------
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = {
       home: document.getElementById('home'),
@@ -545,40 +551,14 @@
 
     fadeElements.forEach(el => observer.observe(el));
 
-    // dummy contact button (secure)
-    const contactBtn = document.getElementById('dummyContactBtn');
-    if (contactBtn) {
-      contactBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const oldToast = document.querySelector('.toast-message');
-        if (oldToast) oldToast.remove();
-        
-        const toast = document.createElement('div');
-        toast.className = 'toast-message';
-        toast.textContent = '✓ Message received (demo). We will reply soon.';
-        toast.style.cssText = `
-          position: fixed; bottom: 1.5rem; right: 1.5rem; background: #1c1c1c;
-          border-left: 4px solid #d4af37; color: #e6e6e6; padding: 1rem 1.8rem;
-          font-family: var(--font-sans); box-shadow: 0 8px 20px rgba(0,0,0,0.7);
-          z-index: 999; opacity: 0; transition: opacity 0.35s; border-radius: 2px;
-          pointer-events: none; max-width: 90vw;
-        `;
-        document.body.appendChild(toast);
-        requestAnimationFrame(() => { toast.style.opacity = '1'; });
-        setTimeout(() => {
-          toast.style.opacity = '0';
-          setTimeout(() => { if (toast.parentNode) toast.remove(); }, 400);
-        }, 2600);
-      });
-    }
-
-    // ensure all content uses textContent — no innerHTML anywhere
+    // No contact button / dummy form anymore.
+    // All interactions use textContent only.
   })();
 </script>
 
 <!-- 
   ==============================================
-  NETLIFY _HEADERS CONFIGURATION (separate file)
+  NETLIFY _HEADERS CONFIGURATION
   ==============================================
   / *
     Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';
@@ -589,4 +569,4 @@
   ==============================================
 -->
 </body>
-          </html>
+  </html>
